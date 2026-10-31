@@ -381,6 +381,59 @@
             border: 1px solid rgba(244, 93, 134, 0.22);
         }
 
+        .festival_text .hero-actions {
+            margin-top: 28px;
+        }
+
+        .hero-actions .btn {
+            width: auto;
+            max-width: calc(100% - 32px);
+            gap: 8px;
+            background: transparent;
+            color: #34343a;
+            font-weight: 600;
+            line-height: 1.4;
+            box-shadow: none;
+        }
+
+        .hero-actions .btn::after {
+            content: "\2192";
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .hero-actions .btn:hover {
+            transform: none;
+            box-shadow: none;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .hero-actions .btn:focus-visible {
+            outline: 3px solid var(--ink);
+            outline-offset: 4px;
+        }
+
+        /* Readable neutral text; retain the existing brand palette. */
+        .section .section-desc,
+        .section .summary-item p,
+        .section .artist-card p,
+        .section .benefit-card p,
+        .section .photo-card p,
+        .section .step-card p,
+        .section .notice-box li {
+            color: #5f5f6b;
+            overflow-wrap: anywhere;
+        }
+
+        .summary-item strong,
+        .artist-card h3,
+        .benefit-card h3,
+        .photo-card h3,
+        .step-card h3 {
+            overflow-wrap: anywhere;
+        }
+
         .section {
             position: relative;
             padding: 120px 0;
@@ -655,6 +708,14 @@
             gap: 28px;
         }
 
+        .artist-card {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .artist-description-break { display: none; }
+
         .artist-card,
         .benefit-card,
         .event-card,
@@ -667,31 +728,32 @@
         }
 
         .artist-image {
+            position: relative;
             height: 440px;
             background-position: center;
             background-size: cover;
         }
 
-        .artist-image.one {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.08)), url("image/singer01.png");
+        .artist-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .artist-image.two {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.08)), url("image/singer02.png");
-        }
-
-        .artist-image.three {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.08)), url("image/singer03.png");
-        }
-
-        .artist-image.four {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.08)), url("image/singer04.png");
+        .artist-image::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.08));
         }
 
         .artist-body {
             position: relative;
             min-height: 165px;
             padding: 34px 28px 30px;
+            flex: 1;
         }
 
         .date-badge {
@@ -730,7 +792,7 @@
         }
 
         .benefit-card.featured p {
-            color: rgba(255, 255, 255, 0.72);
+            color: rgba(255, 255, 255, 0.86);
         }
 
         .benefit-label {
@@ -770,7 +832,7 @@
 
         .event-layout {
             display: grid;
-            grid-template-columns: 1.35fr 1fr;
+            grid-template-columns: 1fr;
             gap: 28px;
             align-items: stretch;
         }
@@ -793,7 +855,7 @@
         }
 
         .photo-card p {
-            margin: 0 0 26px;
+            margin: 0 0 36px;
             color: var(--muted);
             font-size: 17px;
             line-height: 1.7;
@@ -803,6 +865,51 @@
             min-height: 480px;
             border-radius: 8px;
             background: #ffe6ed url("image/photozone.png") center / cover no-repeat;
+        }
+
+        .participation-guide {
+            scroll-margin-top: 24px;
+            margin-top: 88px;
+        }
+
+        .participation-guide > h3 {
+            margin: 0 0 26px;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.35;
+            color: var(--ink);
+            text-align: center;
+            word-break: keep-all;
+        }
+
+        .step-card p + p { margin-top: 12px; }
+        .event-notices .notice-wrap { margin-top: 0; padding-top: 0; border-top: 0; }
+
+        @media (min-width: 981px) {
+            .summary-strip { padding-bottom: 104px; }
+            #reasons { padding-top: 104px; padding-bottom: 104px; }
+            #busking, #events { padding-top: 104px; }
+            #benefits { padding-bottom: 104px; }
+
+            .artist-card p,
+            .benefit-card p,
+            .photo-card p,
+            .step-card p {
+                font-size: 18px;
+                line-height: 1.7;
+            }
+        }
+
+        @media (min-width: 981px) and (max-width: 1200px) {
+            .site-header { gap: 16px; }
+            .gnb { gap: 0; }
+            .gnb a { padding: 12px; font-size: 18px; white-space: nowrap; }
+            .header-audio { width: 210px; }
+            .artist-grid, .benefit-grid { gap: 20px; }
+            .artist-body { padding-right: 18px; padding-left: 18px; }
+            .benefit-card { padding: 28px 24px; }
+            .benefit-card.featured { grid-template-columns: minmax(0, 1fr) 64px; gap: 12px; }
+            .coupon-download { width: 64px; height: 64px; }
         }
 
         .event-grid {
@@ -817,22 +924,43 @@
             text-align: center;
         }
 
-        .process-grid {
+        .participation-guide .process-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            align-items: start;
+            gap: 32px;
+            padding: 36px 32px;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: var(--shadow);
         }
 
-        .step-card {
+        .participation-guide .step-card {
             position: relative;
-            min-height: 240px;
-            padding: 44px 36px;
+            min-width: 0;
+            min-height: 0;
+            padding: 0;
+            overflow: visible;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
         }
 
-        .step-number {
-            width: 54px;
-            height: 54px;
+        .participation-guide .step-number {
+            width: 48px;
+            height: 48px;
+            margin: 0 0 16px;
             font-size: 21px;
+        }
+
+        .participation-guide .step-copy { min-width: 0; }
+
+        .participation-guide .step-card h3 {
+            margin: 0 0 10px;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.35;
         }
 
         .notice-wrap {
@@ -1066,6 +1194,31 @@
                 gap: 20px;
             }
 
+            .event-layout { grid-template-columns: 1fr; }
+            .benefit-card { padding: 28px 24px; }
+            .benefit-card.featured { grid-template-columns: minmax(0, 1fr) 72px; gap: 16px; }
+            .coupon-download { width: 72px; height: 72px; }
+            .participation-guide { margin-top: 52px; }
+            .participation-guide > h3 { margin-bottom: 28px; }
+            .participation-guide .process-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 28px;
+                padding: 32px 28px;
+            }
+            .participation-guide .step-card {
+                display: grid;
+                grid-template-columns: 44px minmax(0, 1fr);
+                align-items: start;
+                gap: 14px;
+            }
+            .participation-guide .step-number {
+                width: 44px;
+                height: 44px;
+                margin: 0;
+            }
+            .participation-guide .step-card h3 { font-size: 22px; }
+            .participation-guide .step-card p { font-size: 16px; line-height: 1.7; }
+
             .photo-card {
                 grid-template-columns: 1fr;
             }
@@ -1158,8 +1311,50 @@
 
             .reason-card {
                 min-height: auto;
-                padding: 34px 22px;
+                display: grid;
+                grid-template-columns: 48px minmax(0, 1fr);
+                column-gap: 14px;
+                row-gap: 6px;
+                padding: 18px 4px;
+                text-align: left;
+                border-bottom: 0;
             }
+
+            .reason-grid { gap: 4px; }
+            .reason-icon { grid-row: 1 / 3; width: 48px; height: 48px; margin: 0; font-size: 23px; }
+            .reason-card h3 { margin: 0; font-size: 20px; }
+            .reason-card p { font-size: 15px; line-height: 1.6; }
+
+            .summary-card, .artist-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-auto-rows: 1fr;
+                gap: 12px;
+            }
+
+            .summary-card { background: transparent; border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
+            .summary-item {
+                min-width: 0;
+                min-height: 0;
+                padding: 20px 16px;
+                border: 1px solid var(--line);
+                border-radius: 8px;
+                box-shadow: var(--shadow);
+            }
+            .summary-icon { width: 44px; height: 44px; margin-bottom: 12px; font-size: 21px; }
+            .summary-item strong { font-size: 18px; line-height: 1.4; }
+            .summary-item p { font-size: 15px; line-height: 1.65; }
+
+            .artist-body { min-height: 140px; padding: 32px 14px 20px; }
+            .artist-card h3 { margin-bottom: 8px; font-size: 24px; font-weight: 700; line-height: 1.3; }
+            .artist-card p {
+                min-height: 3.3em;
+                font-size: 14px;
+                line-height: 1.65;
+                word-break: keep-all;
+                overflow-wrap: anywhere;
+            }
+            .artist-description-break { display: initial; }
+            .date-badge { left: 12px; padding: 0 12px; font-size: 15px; white-space: nowrap; }
 
             .schedule-dot {
                 padding: 18px;
@@ -1173,16 +1368,41 @@
                 width: 100%;
                 justify-content: center;
                 text-align: center;
+                padding: 8px 12px;
+                font-size: 14px;
+                line-height: 1.5;
             }
 
             .artist-image {
-                height: 240px;
-                background-position: center top;
+                height: auto;
+                aspect-ratio: 3 / 4;
+                flex-shrink: 0;
             }
 
+            .artist-image img { object-position: center top; }
+
             .benefit-card.featured {
-                grid-template-columns: 1fr;
+                grid-template-columns: minmax(0, 1fr) 72px;
             }
+
+            .benefit-grid { gap: 12px; }
+            .benefit-card { min-height: 0; padding: 24px 22px; }
+            .benefit-label { margin-bottom: 8px; font-size: 14px; line-height: 1.5; }
+            .benefit-number { margin-bottom: 8px; }
+            .benefit-card h3 { margin-bottom: 8px; font-size: 22px; }
+            .benefit-card p { font-size: 15px; line-height: 1.65; }
+            .photo-card { gap: 20px; }
+            .photo-card p { margin-bottom: 0; font-size: 15px; line-height: 1.7; }
+            .participation-guide > h3 { font-size: 26px; }
+            .participation-guide .process-grid { padding: 32px 18px; gap: 24px; }
+            .participation-guide .step-card { gap: 12px; }
+            .participation-guide .step-card h3 { font-size: 20px; }
+            .participation-guide .step-card p { font-size: 15px; line-height: 1.7; }
+            .notice-box li { font-size: 15px; line-height: 1.75; }
+            .notice-box li + li { margin-top: 6px; }
+            .event-notices { padding-top: 40px; padding-bottom: 40px; }
+            .festival_text .hero-actions { margin-top: 22px; }
+            .hero-actions .btn { padding: 12px 28px; font-size: 17px; }
 
             .photo-image {
                 min-height: 190px;
@@ -1200,6 +1420,12 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+        }
+
+        @media (max-width: 374px) {
+            .summary-card, .artist-grid { gap: 10px; }
+            .summary-item { padding: 18px 12px; }
+            .artist-body { padding-right: 12px; padding-left: 12px; }
         }
     </style>
 </head>
@@ -1265,10 +1491,13 @@
                     <span>&nbsp;</span>
                     <span>롯</span><span>데</span><span>월</span><span>드</span><span>몰</span>
                 </p>
+                <div class="hero-actions">
+                    <a class="btn" href="#busking">공연 일정 보기</a>
+                </div>
             </div>
         </section>
 
-        <section class="section summary-strip" aria-labelledby="summary-title">
+        <section class="section summary-strip" id="visit-guide" aria-labelledby="summary-title">
             <!-- Falling cherry-blossom petals (SVG) -->
             <div class="guide-petals" aria-hidden="true">
                 <svg class="gp-sprite" xmlns="http://www.w3.org/2000/svg">
@@ -1380,35 +1609,35 @@
 
                 <div class="artist-grid">
                     <article class="artist-card">
-                        <div class="artist-image one" aria-hidden="true"></div>
+                        <div class="artist-image" aria-hidden="true"><img src="image/singer01.png" alt="" loading="lazy"></div>
                         <div class="artist-body">
                             <span class="date-badge">04.11 토</span>
                             <h3>정승환</h3>
-                            <p>감미로운 목소리의 싱어송라이터</p>
+                            <p>감미로운 목소리의 <br class="artist-description-break">싱어송라이터</p>
                         </div>
                     </article>
                     <article class="artist-card">
-                        <div class="artist-image two" aria-hidden="true"></div>
+                        <div class="artist-image" aria-hidden="true"><img src="image/singer02.png" alt="" loading="lazy"></div>
                         <div class="artist-body">
                             <span class="date-badge">04.12 일</span>
                             <h3>치즈</h3>
-                            <p>포근한 감성의 보컬리스트</p>
+                            <p>포근한 감성의 <br class="artist-description-break">보컬리스트</p>
                         </div>
                     </article>
                     <article class="artist-card">
-                        <div class="artist-image three" aria-hidden="true"></div>
+                        <div class="artist-image" aria-hidden="true"><img src="image/singer03.png" alt="" loading="lazy"></div>
                         <div class="artist-body">
                             <span class="date-badge">04.18 토</span>
                             <h3>소란</h3>
-                            <p>따뜻한 위로의 밴드 사운드</p>
+                            <p>따뜻한 위로의 <br class="artist-description-break">밴드 사운드</p>
                         </div>
                     </article>
                     <article class="artist-card">
-                        <div class="artist-image four" aria-hidden="true"></div>
+                        <div class="artist-image" aria-hidden="true"><img src="image/singer04.png" alt="" loading="lazy"></div>
                         <div class="artist-body">
                             <span class="date-badge">04.19 일</span>
                             <h3>담솜</h3>
-                            <p>아름다운 듀오의 달콤한 하모니</p>
+                            <p>아름다운 듀오의 <br class="artist-description-break">달콤한 하모니</p>
                         </div>
                     </article>
                 </div>
@@ -1449,7 +1678,7 @@
                     </article>
                 </div>
                 <div class="section-actions">
-                    <a class="btn btn-secondary" href="#summary-title">방문 정보 다시 보기</a>
+                    <a class="btn btn-secondary" href="#visit-guide">방문 정보 다시 보기</a>
                 </div>
             </div>
         </section>
@@ -1466,66 +1695,51 @@
                         <div>
                             <h3>벚꽃 포토존</h3>
                             <p>롯데월드몰 곳곳에 마련된 봄빛 포토존에서 인생샷을 남겨보세요.</p>
-                            <a class="btn btn-secondary" href="#participate">참여 방법 보기</a>
+                            <a class="btn btn-secondary" href="#participate">더 알아보기</a>
                         </div>
                         <div class="photo-image" aria-hidden="true"></div>
                     </article>
-                    <div class="event-grid">
-                        <article class="event-card">
-                            <span class="event-icon" aria-hidden="true">1</span>
-                            <h3>포토존 촬영</h3>
-                            <p>벚꽃 포토존에서 사진을 찍어주세요.</p>
+                </div>
+                <div class="participation-guide" id="participate" aria-labelledby="participate-title">
+                    <h3 id="participate-title">참여 방법</h3>
+                    <div class="process-grid">
+                        <article class="step-card">
+                            <span class="step-number" aria-hidden="true">1</span>
+                            <div class="step-copy">
+                                <h3>포토존 촬영</h3>
+                                <p>벚꽃 포토존에서 사진을 찍어주세요.</p>
+                            </div>
                         </article>
-                        <article class="event-card">
-                            <span class="event-icon" aria-hidden="true">2</span>
-                            <h3>SNS 업로드</h3>
-                            <p>필수 해시태그와 함께 SNS에 올려주세요.</p>
+                        <article class="step-card">
+                            <span class="step-number" aria-hidden="true">2</span>
+                            <div class="step-copy">
+                                <h3>SNS 업로드</h3>
+                                <p>필수 해시태그와 함께 SNS에 올려주세요.</p>
+                            </div>
                         </article>
-                        <article class="event-card">
-                            <span class="event-icon" aria-hidden="true">3</span>
-                            <h3>경품 응모</h3>
-                            <p>업로드 화면을 인증하고 경품에 응모하세요.</p>
-                        </article>
-                        <article class="event-card">
-                            <span class="event-icon" aria-hidden="true">★</span>
-                            <h3>선물 받기</h3>
-                            <p>추첨을 통해 봄맞이 선물을 드립니다.</p>
+                        <article class="step-card">
+                            <span class="step-number" aria-hidden="true">3</span>
+                            <div class="step-copy">
+                                <h3>경품 응모</h3>
+                                <p>업로드 화면을 인증하고 경품에 응모하세요.</p>
+                                <p>이벤트 안내에 따라 인증하면 경품 응모가 완료됩니다.</p>
+                                <p><strong>선물 받기</strong><br>추첨을 통해 봄맞이 선물을 드립니다.</p>
+                            </div>
                         </article>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section section-white has-petals" id="participate" aria-labelledby="participate-title">
+        <section class="section section-white has-petals event-notices" aria-labelledby="event-notice-title">
             <div class="section-inner">
-                <div class="section-head">
-                    <p class="section-kicker">HOW TO PARTICIPATE</p>
-                    <h2 class="section-title" id="participate-title">참여 방법</h2>
-                </div>
-                <div class="process-grid">
-                    <article class="step-card">
-                        <span class="step-number" aria-hidden="true">1</span>
-                        <h3>행사 확인</h3>
-                        <p>방문 날짜와 공연 일정을 먼저 확인합니다.</p>
-                    </article>
-                    <article class="step-card">
-                        <span class="step-number" aria-hidden="true">2</span>
-                        <h3>현장 방문</h3>
-                        <p>잠실 롯데월드몰 현장에서 포토존과 공연을 즐깁니다.</p>
-                    </article>
-                    <article class="step-card">
-                        <span class="step-number" aria-hidden="true">3</span>
-                        <h3>참여 & 인증</h3>
-                        <p>이벤트 안내에 따라 인증하면 경품 응모가 완료됩니다.</p>
-                    </article>
-                </div>
                 <div class="notice-wrap">
                     <div class="notice-box">
                         <h3>이번 주말, 롯데월드몰에서<br>봄을 즐겨보세요</h3>
                         <p class="section-desc">공연 일정과 이벤트 참여 방법을 확인하고 방문하면<br>축제를 더 알차게 즐길 수 있습니다.</p>
                     </div>
                     <div class="notice-box">
-                        <h3>유의사항</h3>
+                        <h3 id="event-notice-title">유의사항</h3>
                         <ul>
                             <li>모든 공연은 무료 관람 가능합니다.</li>
                             <li>우천 시 일부 일정이 변경될 수 있습니다.</li>
@@ -1541,7 +1755,7 @@
             <div class="section-inner">
                 <h2 id="final-title">벚꽃, 공연, 쇼핑 혜택까지<br>봄날의 하루를 완성하세요</h2>
                 <p>2026년 4월 11일부터 19일까지,<br>잠실 롯데월드몰에서 봄축제가 열립니다.</p>
-                <a class="btn" href="#top">행사 일정 다시 보기</a>
+                <a class="btn" href="#busking">행사 일정 다시 보기</a>
             </div>
         </section>
     </main>
